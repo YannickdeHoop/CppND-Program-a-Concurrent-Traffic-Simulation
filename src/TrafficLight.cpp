@@ -40,7 +40,6 @@ void TrafficLight::waitForGreen()
     {
       return;
     }
-    std::this_thread::sleep_for(std::chrono::milliseconds(1));
   }
 }
 
@@ -62,10 +61,11 @@ void TrafficLight::cycleThroughPhases()
   std::uniform_real_distribution<double> distr(4.0, 6.0);
   auto random_number = distr(eng);
   auto start = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double> elapsed_time;
 
   while (true)
   {
-    std::chrono::duration<double> elapsed_time = std::chrono::high_resolution_clock::now() - start;
+    elapsed_time = std::chrono::high_resolution_clock::now() - start;
 
     if (random_number <= elapsed_time.count())
     {
